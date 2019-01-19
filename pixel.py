@@ -3,7 +3,6 @@ import numpy as np
 k=int(raw_input("enter size of grid:"))
 im=cv2.imread("laugh.jpg")
 im=cv2.cvtColor(im,cv2.COLOR_BGR2HSV)
-print im[260][246]
 cv2.imshow('g',im)
 cv2.waitKey()
 w,h=np.size(im,0),np.size(im,1)
@@ -36,9 +35,9 @@ x=0
 y=0
 thresh=40
 #print im
-while x < (w-k):
+while x < w:
     y=0
-    while y < (h-k)+1:
+    while y < h:
             #print 'y=',y
         #for i in xrange(7):
             """i=i+1
@@ -51,58 +50,88 @@ while x < (w-k):
             cv2.imshow('g',resultBGR)
             cv2.waitKey()"""
             if im[x][y][0]==0 and im[x][y][1]==0 and im[x][y][2]!=0:
-                for ind in xrange(k):
-                    #print 'y=',y+ind
+                if y+k<=h:
+                    var=k
+                else:
+                    var=h-y      
+                for ind in xrange(var):                       
                     im[x][y+ind]=[0,0,255]
             elif im[x][y][0]==0 and im[x][y][1]==0 and im[x][y][2]==0:
-                for ind in xrange(k):
-                    #print 'y=',y+ind
+                if y+k<=h:
+                    var=k
+                else:
+                    var=h-y                
+                for ind in xrange(var):
                     im[x][y+ind]=[0,0,0]
             elif im[x][y][1]<15:
-                for ind in xrange(k):
-                    #print 'y=',y+ind
+                if y+k<=h:
+                    var=k
+                else:
+                    var=h-y      
+                for ind in xrange(var):
                     im[x][y+ind]=[0,0,255]
             else:
                 if im[x][y][0]>=140 and im[x][y][0]<255:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):                            
                         im[x][y+ind]=vibhsv[1]
                 elif im[x][y][0]>=130 and im[x][y][0]<140:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):                            
                         im[x][y+ind]=vibhsv[2]
                 elif im[x][y][0]>=70 and im[x][y][0]<130:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):
                         im[x][y+ind]=vibhsv[3]
                 elif im[x][y][0]>=40 and im[x][y][0]<70:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):                            
                         im[x][y+ind]=vibhsv[4]
                 elif im[x][y][0]>=20 and im[x][y][0]<40:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):
                         im[x][y+ind]=vibhsv[5]
                 elif im[x][y][0]>=k and im[x][y][0]<20:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):                            
                         im[x][y+ind]=vibhsv[6]
                 elif im[x][y][0]>=0 and im[x][y][0]<k:
-                    for ind in xrange(k):
-                        #print 'y=',y+ind
+                    if y+k<=h:
+                        var=k
+                    else:
+                        var=h-y      
+                    for ind in xrange(var):                            
                         im[x][y+ind]=vibhsv[7]
                     """elif im[x][y][0]==0 and im[x][y][1]==0  and im[x][y][2]==0:
-                        for ind in xrange(k):
+                        for ind in xrange(var):
                             grid[x][y+ind]=[0,0,0]
                     elif im[x][y][1]>=150 and im[x][y][1]<=255  and im[x][y][2]>=200 and im[x][y][2]<=255: 
                         if im[x][y][0]>0 and im[x][y][0]<40:
-                            for ind in xrange(k):
+                            for ind in xrange(var):
                                 grid[x][y+ind]=[0,255,255]
                     elif im[x][y][1]==0 and im[x][y][2]==255:
-                        for ind in xrange(k):
+                        for ind in xrange(var):
                             grid[x][y+ind]=[255,0,0]
                     elif im[x][y][0]==0 and im[x][y][1]==255:
-                        for ind in xrange(k):
+                        for ind in xrange(var):
                             im[x][y+ind]=[0,255,255]"""                
             y=y+k+1
     x=x+1
@@ -114,7 +143,6 @@ while x < (w-k):
 #ker=np.zeros((k,k,3))
 im=cv2.cvtColor(im,cv2.COLOR_HSV2BGR)
 #gr(k,im)
-print grid[230][246]
 cv2.imshow('g',im)
 cv2.waitKey()
 #cv2.imwrite("newpixart.jpg",im)
